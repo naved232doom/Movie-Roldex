@@ -1,11 +1,13 @@
 import React from "react";
 
-const MovieList = (props) => {
+const SeriesList = (props) => {
   const FavouriteComponent = props.favComponent;
-    
+  const series= props.movies.filter(movie=> movie.Type=='series');
+    console.log(series);
   return (
+      
     <>
-      {props.movies.map((movie, index) => (
+      {series.map((movie, index) => (
         <div className="image-container d-flex justify-content-start m-3">
           <img src={movie.Poster} alt="movie"></img>
           <div
@@ -18,7 +20,6 @@ const MovieList = (props) => {
       ))}
     </>
   );
-     
 };
 
-export default MovieList;
+export default SeriesList;
