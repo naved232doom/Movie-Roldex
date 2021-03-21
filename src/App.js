@@ -15,7 +15,7 @@ const App = () => {
 
   const getMovieRequest = async (searchValue) => {
     // s parameter is used as search parameter in the search box
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=e9d5800a`;
+    const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=e9d5800a`;
     // fetching data from omdbi api async function
     const response = await fetch(url);
     // converting response to json object
