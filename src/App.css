@@ -1,6 +1,7 @@
 body {
   background-color: black;
   color: white;
+  
 }
 .movie-app > .row {
   overflow-x: auto;
@@ -16,6 +17,13 @@ body {
 }
 .image-container:hover .overlay {
   opacity: 1;
+}
+.headerclass{
+  text-align: center;
+  margin: 0 auto;
+  font-family: 'Ranchers';
+  font-size: 65px;
+
 }
 .overlay {
   position: absolute;

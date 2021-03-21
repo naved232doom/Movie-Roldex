@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieList from "./components/movies.component";
-import SeriesList from './components/series.component';
+import SeriesList from "./components/series.component";
 import MovieHeading from "./components/movie-heading.component";
 import SearchBox from "./components/search-box.component";
 import AddFavourites from "./components/add-favourites.component";
 import RemoveFavourites from "./components/remove-favourites.component";
 const App = () => {
   const [movies, setMovies] = useState([]);
- 
+  const [series, setSeries] = useState([]);
   let [searchValue, setSearchValue] = useState("");
   const [favourites, setFavourites] = useState([]);
 
@@ -21,7 +21,18 @@ const App = () => {
     // converting response to json object
     const responseJSON = await response.json();
     console.log(responseJSON);
-    if (responseJSON.Search) setMovies(responseJSON.Search);
+    if (responseJSON.Search) {
+      const MovieList = responseJSON.Search.filter(
+        (mov) => mov.Type == "movie"
+      );
+      if (MovieList) setMovies(MovieList);
+    }
+    if (responseJSON.Search) {
+      const seriesList = responseJSON.Search.filter(
+        (mov) => mov.Type == "series"
+      );
+      if (seriesList) setSeries(seriesList);
+    }
   };
   // const getdefaultMovieRequest = async (Value='marvel') => {
   //   // s parameter is used as search parameter in the search box
@@ -35,12 +46,12 @@ const App = () => {
   // };
 
   useEffect(() => {
-    if(searchValue)
-    getMovieRequest(searchValue);
-    else{
-      searchValue='star wars';
-    getMovieRequest(searchValue);
-    }  }, [searchValue]);
+    if (searchValue) getMovieRequest(searchValue);
+    else {
+      searchValue = "scooby";
+      getMovieRequest(searchValue);
+    }
+  }, [searchValue]);
 
   useEffect(() => {
     const movieFavourites = JSON.parse(
@@ -63,10 +74,12 @@ const App = () => {
       (curmovie) => curmovie.imdbID != movie.imdbID
     );
     setFavourites(newFavouriteList);
-    
   };
   return (
     <div className="container-fluid movie-app">
+      <div className="d-flex justify-content-center headerclass">
+        <MovieHeading heading="Movies & TV Series"></MovieHeading>
+      </div>
       <div className="row d-flex align-items-center  mt-4 mb-4">
         <div className="ml-4 mr-4">
           <MovieHeading heading="Movies"></MovieHeading>
@@ -80,7 +93,6 @@ const App = () => {
 
       <div className="row">
         <MovieList
-         
           movies={movies}
           favComponent={AddFavourites}
           handlefavouriteClick={addFavourites}
@@ -96,10 +108,10 @@ const App = () => {
           setSearchValue={setSearchValue}
         ></SearchBox>
       </div>
-    
+
       <div className="row">
         <MovieList
-          movies={movies}
+          movies={series}
           favComponent={AddFavourites}
           handlefavouriteClick={addFavourites}
         />
