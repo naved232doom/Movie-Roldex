@@ -87,7 +87,7 @@ const App = () => {
         <MovieHeading heading="Movies & TV Series"></MovieHeading>
       </div>
       <div className="row d-flex align-items-center  mt-4 mb-4">
-        <div className="ml-4 mr-4">
+        <div className="ml-4">
           <MovieHeading heading="Movies"></MovieHeading>
         </div>
 
@@ -105,7 +105,7 @@ const App = () => {
         />
       </div>
       <div className="row d-flex align-items-center  mt-4 mb-4">
-        <div className="ml-4 mr-4">
+        <div className="ml-4">
           <MovieHeading heading="Series"></MovieHeading>
         </div>
 
@@ -123,7 +123,7 @@ const App = () => {
         />
       </div>
       <div className="row d-flex align-items-center  mt-4 mb-4">
-        <div className="ml-4 mr-4">
+        <div ml-4>
           <MovieHeading heading="Favourites"></MovieHeading>
         </div>
       </div>
