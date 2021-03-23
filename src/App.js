@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import defaultMovies from './default-data/movies.default';
+import defaultSeries from './default-data/default.series';
 import MovieList from "./components/movies.component";
 import SeriesList from "./components/series.component";
 import MovieHeading from "./components/movie-heading.component";
@@ -10,6 +12,7 @@ import RemoveFavourites from "./components/remove-favourites.component";
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
+  const [isSeries]= useState([]);
   let [searchValue, setSearchValue] = useState("");
   const [favourites, setFavourites] = useState([]);
 
@@ -26,6 +29,9 @@ const App = () => {
         (mov) => mov.Type == "movie"
       );
       if (MovieList) setMovies(MovieList);
+    }
+    else{
+      setMovies(defaultMovies);
     }
     if (responseJSON.Search) {
       const seriesList = responseJSON.Search.filter(
@@ -48,7 +54,7 @@ const App = () => {
   useEffect(() => {
     if (searchValue) getMovieRequest(searchValue);
     else {
-      searchValue = "scooby";
+      searchValue = "";
       getMovieRequest(searchValue);
     }
   }, [searchValue]);
@@ -110,7 +116,7 @@ const App = () => {
       </div>
 
       <div className="row">
-        <MovieList
+        <SeriesList
           movies={series}
           favComponent={AddFavourites}
           handlefavouriteClick={addFavourites}
